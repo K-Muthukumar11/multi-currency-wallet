@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:15:///multi_currency_wallet_test
+    username: test
+    password: test
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+
+app:
+  jwt:
+    secret: dGVzdC1zZWNyZXQta2V5LXRoYXQtaXMtbG9uZy1lbm91Z2gtZm9yLXRlc3Rpbmcx
+    expiration-ms: 3600000
+
+  cors:
+    allowed-origins: http://localhost:5173
+
+logging:
+  level:
+    com.multi.currency.wallet: DEBUG      
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
