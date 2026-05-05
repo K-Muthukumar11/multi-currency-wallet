@@ -1,7 +1,5 @@
 package com.multi.currency.wallet.domain.model;
 
-import com.multi.currency.wallet.domain.exception.InsufficientFundsException;
-import com.multi.currency.wallet.domain.exception.InvalidAccountOperationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
