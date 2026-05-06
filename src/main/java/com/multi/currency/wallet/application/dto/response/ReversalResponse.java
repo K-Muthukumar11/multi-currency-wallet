@@ -7,12 +7,12 @@ import java.util.UUID;
 import com.multi.currency.wallet.domain.model.TransactionType;
 
 public record ReversalResponse(
-        UUID reversalTransactionId,
-        UUID originalTransactionId,
-        TransactionType reversalType,
-        BigDecimal amount,
-        String currencyCode,
-        BigDecimal balanceAfter,
-        String description,
-        Instant createdAt) {
+                UUID reversalTransactionId,
+                UUID originalTransactionId,
+                TransactionType reversalType,
+                BigDecimal amount,
+                String currencyCode,
+                BigDecimal balanceAfter,
+                String description,
+                Instant createdAt) {
 }
