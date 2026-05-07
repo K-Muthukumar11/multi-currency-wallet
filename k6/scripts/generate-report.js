@@ -268,7 +268,7 @@ const html = `<!DOCTYPE html>
   </div>
 
   <footer>
-    Mini Wallet Banking System · k6 Performance &amp; Functional Tests · Baton Systems
+    Mini Wallet Banking System · k6 Performance &amp; Functional Tests
   </footer>
 </body>
 </html>`;
