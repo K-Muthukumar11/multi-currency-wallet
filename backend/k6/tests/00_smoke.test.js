@@ -1,7 +1,8 @@
 // ============================================================
 // tests/00_smoke.test.js — End-to-end smoke (single VU)
-// Fast sanity check: register → account → deposit → transfer
-// → list transactions → reverse.  All in one run.
+// Fast sanity check: register → account → deposit → reverse
+// → re-deposit → transfer → list transactions → reverse transfer
+// → double-reversal guard.  All in one run.
 // ============================================================
 
 import { check, group } from 'k6';
@@ -57,63 +58,75 @@ export default function () {
     const res  = deposit(token, accA.accountNumber, 1000, 'USD', 'Smoke seed');
     const body = JSON.parse(res.body);
     check(res, {
-      'deposit 201':            (r) => r.status === 201,
-      'balance is 1000':        () => body.balanceAfter === 1000,
-      'type is DEPOSIT':        () => body.type === 'DEPOSIT',
+      'deposit 201':      (r) => r.status === 201,
+      'balance is 1000':  () => parseFloat(body.balanceAfter) === 1000,
+      'type is DEPOSIT':  () => body.type === 'DEPOSIT',
     });
     txnId = body.id;
   });
 
-  // ── Step 4: Transfer ──────────────────────────────────────
-  group('SMOKE-06 | Transfer 300 USD A → B', () => {
+  // ── Step 4: Reverse the deposit BEFORE any transfer ───────
+  // Balance is still 1000 here so the reversal succeeds.
+  group('SMOKE-06 | Reverse the deposit', () => {
+    const res  = reverseTransaction(token, txnId, 'Smoke reversal');
+    const body = JSON.parse(res.body);
+    check(res, {
+      'reversal 201':                       (r) => r.status === 201,
+      'reversal references original txnId': () => body[0]?.referenceTransactionId === txnId,
+    });
+  });
+
+  // ── Step 5: Double-reversal guard ─────────────────────────
+  // A reversal record now exists for txnId, so this must be rejected.
+  group('SMOKE-07 | Double-reversal of deposit is rejected', () => {
+    const res = reverseTransaction(token, txnId, 'second reversal');
+    check(res, {
+      'double reversal 4xx': (r) => r.status >= 400 && r.status < 500,
+    });
+  });
+
+  // ── Step 6: Re-deposit so account A has funds for transfer ─
+  group('SMOKE-08 | Re-deposit 1000 USD into account A', () => {
+    const res  = deposit(token, accA.accountNumber, 1000, 'USD', 'Smoke re-seed');
+    const body = JSON.parse(res.body);
+    check(res, {
+      're-deposit 201':    (r) => r.status === 201,
+      'balance is 1000':   () => parseFloat(body.balanceAfter) === 1000,
+    });
+  });
+
+  // ── Step 7: Transfer ──────────────────────────────────────
+  group('SMOKE-09 | Transfer 300 USD A → B', () => {
     const res  = transfer(token, accA.accountNumber, accB.accountNumber, 300, 'USD', 'Smoke transfer');
     const body = JSON.parse(res.body);
     check(res, {
-      'transfer 201':                  (r) => r.status === 201,
-      'debit balanceAfter is 700':     () => body.debitTransaction.balanceAfter === 700,
-      'credit balanceAfter is 300':    () => body.creditTransaction.balanceAfter === 300,
+      'transfer 201':               (r) => r.status === 201,
+      'debit balanceAfter is 700':  () => parseFloat(body.debitTransaction.balanceAfter) === 700,
+      'credit balanceAfter is 300': () => parseFloat(body.creditTransaction.balanceAfter) === 300,
     });
     debitTxnId = body.debitTransaction.id;
   });
 
-  // ── Step 5: List transactions ─────────────────────────────
-  group('SMOKE-07 | List my transactions', () => {
+  // ── Step 8: List transactions ─────────────────────────────
+  group('SMOKE-10 | List my transactions', () => {
     const res  = getMyTransactions(token);
     const txns = JSON.parse(res.body);
     check(res, {
-      'list 200':                  (r) => r.status === 200,
-      'at least 3 entries':        () => txns.length >= 3,
-      'has DEPOSIT type':          () => txns.some((t) => t.type === 'DEPOSIT'),
-      'has TRANSFER_DEBIT type':   () => txns.some((t) => t.type === 'TRANSFER_DEBIT'),
-      'has TRANSFER_CREDIT type':  () => txns.some((t) => t.type === 'TRANSFER_CREDIT'),
+      'list 200':                 (r) => r.status === 200,
+      'at least 3 entries':       () => txns.length >= 3,
+      'has DEPOSIT type':         () => txns.some((t) => t.type === 'DEPOSIT'),
+      'has TRANSFER_DEBIT type':  () => txns.some((t) => t.type === 'TRANSFER_DEBIT'),
+      'has TRANSFER_CREDIT type': () => txns.some((t) => t.type === 'TRANSFER_CREDIT'),
     });
   });
 
-  // ── Step 6: Reverse deposit ───────────────────────────────
-  group('SMOKE-08 | Reverse the deposit', () => {
-    const res  = reverseTransaction(token, txnId, 'Smoke reversal');
-    const body = JSON.parse(res.body);
-    check(res, {
-      'reversal 201':                               (r) => r.status === 201,
-      'reversal references original txnId':         () => body[0]?.referenceTransactionId === txnId,
-    });
-  });
-
-  // ── Step 7: Reverse transfer (both legs) ─────────────────
-  group('SMOKE-09 | Reverse the transfer atomically', () => {
+  // ── Step 9: Reverse transfer (both legs) ──────────────────
+  group('SMOKE-11 | Reverse the transfer atomically', () => {
     const res  = reverseTransfer(token, debitTxnId);
     const body = JSON.parse(res.body);
     check(res, {
-      'reverse-transfer 201':             (r) => r.status === 201,
-      '2 reversal entries returned':      () => body.length === 2,
-    });
-  });
-
-  // ── Step 8: Double-reversal guard ────────────────────────
-  group('SMOKE-10 | Double-reversal of deposit is rejected', () => {
-    const res = reverseTransaction(token, txnId, 'second reversal');
-    check(res, {
-      'double reversal 4xx': (r) => r.status >= 400 && r.status < 500,
+      'reverse-transfer 201':        (r) => r.status === 201,
+      '2 reversal entries returned': () => body.length === 2,
     });
   });
 }
