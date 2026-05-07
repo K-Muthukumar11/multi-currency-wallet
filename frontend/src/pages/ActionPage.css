@@ -1,0 +1,107 @@
+.action-page { max-width: 800px; }
+
+.action-page__header { margin-bottom: 28px; }
+.action-page__title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--ink-1);
+}
+
+.action-page__layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .action-page__layout { grid-template-columns: 1fr; }
+}
+
+.action-page__form { overflow: hidden; }
+.action-page__form-inner {
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 24px;
+}
+
+.action-page__side { display: flex; flex-direction: column; gap: 16px; }
+
+.action-page__preview {
+  padding: 20px;
+}
+.action-page__preview-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.action-page__preview-sublabel {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.action-page__preview-inline {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.action-page__info {
+  padding: 18px 20px;
+}
+.action-page__info-title {
+  font-size: 12px; font-weight: 600;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.action-page__info-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.action-page__info-list li {
+  font-size: 12px;
+  color: var(--ink-2);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+.action-page__info-list li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--ink-3);
+}
+
+.action-page__result {
+  padding: 20px;
+  border-color: rgba(62,207,142,0.3);
+  background: rgba(62,207,142,0.04);
+}
+.action-page__result-icon {
+  width: 32px; height: 32px;
+  background: var(--green-dim);
+  color: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.action-page__result-label {
+  font-size: 13px; font-weight: 600;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.action-page__result-rows { display: flex; flex-direction: column; gap: 8px; }
+
+.result-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.result-row > span:first-child {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
