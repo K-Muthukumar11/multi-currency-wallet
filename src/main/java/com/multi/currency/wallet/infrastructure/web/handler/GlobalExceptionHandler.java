@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.multi.currency.wallet.domain.exception.AccountNotFoundException;
+import com.multi.currency.wallet.domain.exception.AlreadyReversedException;
 import com.multi.currency.wallet.domain.exception.DomainException;
 import com.multi.currency.wallet.domain.exception.InsufficientFundsException;
 import com.multi.currency.wallet.domain.exception.InvalidAccountOperationException;
@@ -65,6 +66,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ProblemDetail> handleAccessDenied(AccessDeniedException ex) {
         return buildProblem(HttpStatus.FORBIDDEN, "Access Denied");
+    }
+
+    @ExceptionHandler(AlreadyReversedException.class)
+    public ResponseEntity<ProblemDetail> handleAlreadyReversed(AlreadyReversedException ex) {
+        return buildProblem(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

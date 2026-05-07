@@ -636,7 +636,7 @@ class WalletIntegrationTest {
                                 new HttpEntity<>(new ReversalRequest(txId, "Duplicate reversal"), bearerHeaders(token)),
                                 String.class);
 
-                assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
         }
 
         @Test
