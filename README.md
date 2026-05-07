@@ -191,7 +191,8 @@ Use cases (`application/usecase/`) depend only on the repository interfaces, nev
 | Tool | Version | Notes |
 |---|---|---|
 | Java | 21+ | Use `./mvnw` — no local Maven install needed |
-| PostgreSQL | 15+ | Required for production and integration tests |
+| Docker | 20.10+ | Required for integration tests (Testcontainers spins up PostgreSQL 15 automatically) |
+| PostgreSQL | 15+ | Required for **production** only — integration tests use Docker via Testcontainers |
 | Node.js | 18+ | For frontend and k6 report generation |
 | npm | 9+ | Comes with Node.js |
 | k6 | ≥ 0.50 | For load and functional API tests |
@@ -260,57 +261,47 @@ On first startup, Flyway automatically runs the migration scripts in `src/main/r
 
 ## PostgreSQL Setup — Integration Tests
 
-The integration test (`WalletIntegrationTest`) connects to a **separate local test database** — never the production database.
+> **No manual database setup required.** The integration test uses **Testcontainers** to spin up a real PostgreSQL 15 Docker container automatically at test startup and tear it down when finished. The only prerequisite is a running Docker daemon.
 
-### Step 1 — Create the test database
+### How it works
 
-```sql
-CREATE DATABASE multi_currency_wallet_test;
-```
-
-### Step 2 — Update `application-test.yml`
-
-Open `src/test/resources/application-test.yml` and set your local credentials:
+The `application-test.yml` datasource URL uses the special Testcontainers JDBC scheme:
 
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/multi_currency_wallet_test
-    username: postgres          # your local postgres username
-    password: your_password     # your local postgres password
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-  flyway:
-    enabled: true
-    clean-disabled: false       # required — allows flyway.clean() in @BeforeAll
-
-app:
-  jwt:
-    secret: dGVzdC1zZWNyZXQta2V5LXRoYXQtaXMtbG9uZy1lbm91Z2gtZm9yLXRlc3Rpbmcx
-    expiration-ms: 3600000
-
-  cors:
-    allowed-origins: http://localhost:5173
+    url: jdbc:tc:postgresql:15:///multi_currency_wallet_test?TimeZone=UTC
+    username: postgres
+    password: test
 ```
 
-> **`clean-disabled: false`** allows `WalletIntegrationTest` to call `flyway.clean()` then `flyway.migrate()` in `@BeforeAll`, resetting the schema to a clean state before every test run.
->
-> **Never point this URL at the production `wallet_db` database.**
+The `jdbc:tc:` prefix is intercepted by the Testcontainers JDBC driver, which:
 
-### Step 3 — Run the integration test
+1. Pulls the `postgres:15` Docker image on first run (cached for subsequent runs)
+2. Starts a temporary container bound to a random free port
+3. Hands the resolved JDBC URL to Spring's connection pool
+4. Stops and removes the container automatically when the JVM exits
+
+Flyway then runs all migrations inside that container, and `WalletIntegrationTest`'s `@BeforeAll` calls `flyway.clean()` + `flyway.migrate()` to guarantee a pristine schema before every test run.
+
+**The test database is completely isolated from production and requires no credentials, no port configuration, and no manual SQL.**
+
+### Step 1 — Ensure Docker is running
+
+```bash
+docker info   # must succeed before running tests
+```
+
+### Step 2 — Run the integration test
 
 ```bash
 cd backend
-./mvnw test -Dtest="WalletIntegrationTest"
+./mvnw test -Dtest="WalletIntegrationTest" -P test
 ```
 
-Flyway migrations run automatically — no manual table creation needed.
+On the very first run, Docker pulls the `postgres:15` image (~130 MB). All subsequent runs reuse the cached image and start in seconds.
+
+> **`clean-disabled: false`** in `application-test.yml` is required — it allows `WalletIntegrationTest` to call `flyway.clean()` in `@BeforeAll`, resetting the container schema to a clean state before every test run. This setting is safe here because the container is ephemeral and completely isolated from production.
 
 ---
 
@@ -367,11 +358,13 @@ The frontend starts at **`http://localhost:5173`** and proxies all `/api` reques
 
 Runs the full unit test suite — entity tests and use case interactor tests. Expected run time: under 10 seconds.
 
-### Integration test only (requires local PostgreSQL)
+### Integration test only (requires Docker)
 
 ```bash
 ./mvnw test -Dtest="WalletIntegrationTest"
 ```
+
+Testcontainers starts a fresh PostgreSQL 15 Docker container, Flyway migrates it, and the full test suite runs against it. No local PostgreSQL installation needed — just Docker.
 
 Covers 25 scenarios across three sections:
 
