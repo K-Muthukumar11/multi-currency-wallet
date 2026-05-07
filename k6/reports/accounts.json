@@ -1,0 +1,361 @@
+{
+    "root_group": {
+        "groups": {
+            "ACC-01 | Create USD account": {
+                "id": "25e0b743b43e7117f8da7c4e43b37e6d",
+                "groups": {},
+                "checks": {
+                        "create account returns 201": {
+                            "path": "::ACC-01 | Create USD account::create account returns 201",
+                            "id": "f1ce20925e78e8c6cec66808f0ed367e",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "create account returns 201"
+                        },
+                        "response has accountNumber": {
+                            "id": "85ea5d3cb5d3784e3f34ccd46ea9349f",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "response has accountNumber",
+                            "path": "::ACC-01 | Create USD account::response has accountNumber"
+                        },
+                        "response has id": {
+                            "path": "::ACC-01 | Create USD account::response has id",
+                            "id": "2aeec31bc9b4334d68f40a028837aea2",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "response has id"
+                        },
+                        "response balance is 0": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "response balance is 0",
+                            "path": "::ACC-01 | Create USD account::response balance is 0",
+                            "id": "24fe0f6a199f47009a96a39d91e1cfab"
+                        },
+                        "response status is ACTIVE": {
+                            "name": "response status is ACTIVE",
+                            "path": "::ACC-01 | Create USD account::response status is ACTIVE",
+                            "id": "56e1bf2809cdecc0dfd03549795cfb69",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "response currencyCode is USD": {
+                            "name": "response currencyCode is USD",
+                            "path": "::ACC-01 | Create USD account::response currencyCode is USD",
+                            "id": "c3364b353557b27c5e314bfda0f854e2",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "ACC-01 | Create USD account",
+                "path": "::ACC-01 | Create USD account"
+            },
+            "ACC-02 | Create EUR account (multi-currency support)": {
+                "name": "ACC-02 | Create EUR account (multi-currency support)",
+                "path": "::ACC-02 | Create EUR account (multi-currency support)",
+                "id": "5ebf9ce668393bb8376d8d413238c317",
+                "groups": {},
+                "checks": {
+                        "EUR account created 201": {
+                            "path": "::ACC-02 | Create EUR account (multi-currency support)::EUR account created 201",
+                            "id": "de2ead22fd8f2a206f7a39aaed4f4b4e",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "EUR account created 201"
+                        },
+                        "currency is EUR": {
+                            "fails": 0,
+                            "name": "currency is EUR",
+                            "path": "::ACC-02 | Create EUR account (multi-currency support)::currency is EUR",
+                            "id": "31983b06ada10a7f64d0aa2c89fa7101",
+                            "passes": 1
+                        }
+                    }
+            },
+            "ACC-03 | Create INR account (ISO 4217 currency)": {
+                "path": "::ACC-03 | Create INR account (ISO 4217 currency)",
+                "id": "601b0540547e2b1d418613d3c7a6d9c3",
+                "groups": {},
+                "checks": {
+                        "INR account created 201": {
+                            "name": "INR account created 201",
+                            "path": "::ACC-03 | Create INR account (ISO 4217 currency)::INR account created 201",
+                            "id": "cd618e6c604d212f1fe99f4c96c02f20",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "currency is INR": {
+                            "id": "8ef0d1373fb964252e443d5f381ed09c",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "currency is INR",
+                            "path": "::ACC-03 | Create INR account (ISO 4217 currency)::currency is INR"
+                        }
+                    },
+                "name": "ACC-03 | Create INR account (ISO 4217 currency)"
+            },
+            "ACC-04 | List my accounts returns all created accounts": {
+                "groups": {},
+                "checks": {
+                        "list accounts returns 200": {
+                            "name": "list accounts returns 200",
+                            "path": "::ACC-04 | List my accounts returns all created accounts::list accounts returns 200",
+                            "id": "7cd853a96b89ea1f8702d83094f096ef",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "response is array": {
+                            "path": "::ACC-04 | List my accounts returns all created accounts::response is array",
+                            "id": "ad70f93bcc56c441fbdd762feb6d9576",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "response is array"
+                        },
+                        "list contains at least 2 items": {
+                            "name": "list contains at least 2 items",
+                            "path": "::ACC-04 | List my accounts returns all created accounts::list contains at least 2 items",
+                            "id": "1f33bd6e56facb5e01e9e29203c95629",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "ACC-04 | List my accounts returns all created accounts",
+                "path": "::ACC-04 | List my accounts returns all created accounts",
+                "id": "3d5b7d96b78925838c6a4a7b15a1ca4f"
+            },
+            "ACC-05 | Currency code too short returns 400": {
+                "checks": {
+                    "short currency code returns 400": {
+                        "name": "short currency code returns 400",
+                        "path": "::ACC-05 | Currency code too short returns 400::short currency code returns 400",
+                        "id": "c1256ac9e124828ad1c8b2a84f10a1c4",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "ACC-05 | Currency code too short returns 400",
+                "path": "::ACC-05 | Currency code too short returns 400",
+                "id": "59d1547a36e3b00c4ac53219d4916259",
+                "groups": {}
+            },
+            "ACC-06 | Currency code too long returns 400": {
+                "name": "ACC-06 | Currency code too long returns 400",
+                "path": "::ACC-06 | Currency code too long returns 400",
+                "id": "aa182426827d872150e3c2a5459f6287",
+                "groups": {},
+                "checks": {
+                        "long currency code returns 400": {
+                            "name": "long currency code returns 400",
+                            "path": "::ACC-06 | Currency code too long returns 400::long currency code returns 400",
+                            "id": "ef05cee7a09579dd2e0b5b2b0526b555",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "ACC-07 | Empty currency code returns 400": {
+                "name": "ACC-07 | Empty currency code returns 400",
+                "path": "::ACC-07 | Empty currency code returns 400",
+                "id": "d8dc63406a5fdd07b5fa1d6e192ba93a",
+                "groups": {},
+                "checks": {
+                        "empty currency code returns 400": {
+                            "name": "empty currency code returns 400",
+                            "path": "::ACC-07 | Empty currency code returns 400::empty currency code returns 400",
+                            "id": "ea8a982fec181b3995814fdfdba5c0d1",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "ACC-08 | Create account without auth token returns 401/403": {
+                "name": "ACC-08 | Create account without auth token returns 401/403",
+                "path": "::ACC-08 | Create account without auth token returns 401/403",
+                "id": "246404883697471891293de3a09882c9",
+                "groups": {},
+                "checks": {
+                        "no token returns 401 or 403": {
+                            "id": "8ae5cdb9ff6353a27020a76583c58e50",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "no token returns 401 or 403",
+                            "path": "::ACC-08 | Create account without auth token returns 401/403::no token returns 401 or 403"
+                        }
+                    }
+            },
+            "ACC-09 | User only sees their own accounts": {
+                "checks": {
+                    "setup: register 201": {
+                        "name": "setup: register 201",
+                        "path": "::ACC-09 | User only sees their own accounts::setup: register 201",
+                        "id": "b686c3ff74a8d53a4fd10099301a80d2",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "setup: login 200": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "setup: login 200",
+                        "path": "::ACC-09 | User only sees their own accounts::setup: login 200",
+                        "id": "7058341882dc1e2ea082b44e7f5f8a82"
+                    },
+                    "can't see other user's accounts - list is own": {
+                        "name": "can't see other user's accounts - list is own",
+                        "path": "::ACC-09 | User only sees their own accounts::can't see other user's accounts - list is own",
+                        "id": "24d56bf374350fd5a6e4ea965e120875",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "ACC-09 | User only sees their own accounts",
+                "path": "::ACC-09 | User only sees their own accounts",
+                "id": "10b18d4813959a4ab3963fd548304e9a",
+                "groups": {}
+            }
+        },
+        "checks": {
+            "setup: register 201": {
+                "name": "setup: register 201",
+                "path": "::setup: register 201",
+                "id": "318977f969f143ded6615dc8c3347607",
+                "passes": 1,
+                "fails": 0
+            },
+            "setup: login 200": {
+                "path": "::setup: login 200",
+                "id": "c628dd272ab277a51676393b21166ea1",
+                "passes": 1,
+                "fails": 0,
+                "name": "setup: login 200"
+            }
+        },
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "metrics": {
+        "group_duration": {
+            "avg": 74.50898888888888,
+            "min": 10.902,
+            "med": 25.6328,
+            "max": 397.2861,
+            "p(90)": 147.96986000000004,
+            "p(95)": 272.62797999999987
+        },
+        "http_reqs": {
+            "count": 16,
+            "rate": 15.590507524612295
+        },
+        "iteration_duration": {
+            "avg": 1026.2655,
+            "min": 1026.2655,
+            "med": 1026.2655,
+            "max": 1026.2655,
+            "p(90)": 1026.2655,
+            "p(95)": 1026.2655
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "data_received": {
+            "rate": 11500.922519562433,
+            "count": 11803
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.9744067202882685
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0,
+            "max": 43.1502,
+            "p(90)": 1.14555,
+            "p(95)": 11.6472,
+            "avg": 2.90668125
+        },
+        "http_req_waiting": {
+            "avg": 56.55375625,
+            "min": 5.1009,
+            "med": 24.721,
+            "max": 172.8562,
+            "p(90)": 148.12065,
+            "p(95)": 170.675725
+        },
+        "data_sent": {
+            "count": 5732,
+            "rate": 5585.299320692355
+        },
+        "http_req_sending": {
+            "avg": 0.13658125,
+            "min": 0,
+            "med": 0,
+            "max": 0.5781,
+            "p(90)": 0.54565,
+            "p(95)": 0.5604
+        },
+        "http_req_duration": {
+            "p(95)": 173.6938,
+            "avg": 60.5682,
+            "min": 9.834,
+            "med": 28.882199999999997,
+            "max": 173.7916,
+            "p(90)": 152.9728,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_receiving": {
+            "avg": 3.8778625,
+            "min": 0.805,
+            "med": 3.8185,
+            "max": 7.9283,
+            "p(90)": 6.030749999999999,
+            "p(95)": 6.921125
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 173.7916,
+            "p(90)": 169.52352000000002,
+            "p(95)": 173.71988,
+            "avg": 75.126525,
+            "min": 25.0106,
+            "med": 45.98195
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_failed": {
+            "passes": 4,
+            "fails": 12,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 0.25
+        },
+        "http_req_connecting": {
+            "avg": 0.2529125,
+            "min": 0,
+            "med": 0,
+            "max": 1.782,
+            "p(90)": 0.8565,
+            "p(95)": 1.30515
+        },
+        "checks": {
+            "passes": 22,
+            "fails": 0,
+            "value": 1
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        }
+    }
+}

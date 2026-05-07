@@ -1,0 +1,432 @@
+{
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "REV-01 | Reverse a deposit creates a reversal entry": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "name": "setup: deposit 201",
+                        "path": "::REV-01 | Reverse a deposit creates a reversal entry::setup: deposit 201",
+                        "id": "79b127ee597d4f66719131a848e4b8b5",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "reversal returns 201": {
+                        "name": "reversal returns 201",
+                        "path": "::REV-01 | Reverse a deposit creates a reversal entry::reversal returns 201",
+                        "id": "21bd6fbedfb058c34cd16e5b9681ca2b",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "response is array": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "response is array",
+                        "path": "::REV-01 | Reverse a deposit creates a reversal entry::response is array",
+                        "id": "94138b319e5a209bf2895ade17168eb1"
+                    },
+                    "reversal entry has referenceTransactionId": {
+                        "name": "reversal entry has referenceTransactionId",
+                        "path": "::REV-01 | Reverse a deposit creates a reversal entry::reversal entry has referenceTransactionId",
+                        "id": "979041f1d36a6946756c298c09b3bb28",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "reversal type contains REVERSAL": {
+                        "name": "reversal type contains REVERSAL",
+                        "path": "::REV-01 | Reverse a deposit creates a reversal entry::reversal type contains REVERSAL",
+                        "id": "9842df72d9ed9587b8dbb9c590be9b88",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "REV-01 | Reverse a deposit creates a reversal entry",
+                "path": "::REV-01 | Reverse a deposit creates a reversal entry",
+                "id": "04db8307afdf9c26e0bc3c7f7918574c",
+                "groups": {}
+            },
+            "REV-02 | Original transaction is not modified after reversal": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "name": "setup: deposit 201",
+                        "path": "::REV-02 | Original transaction is not modified after reversal::setup: deposit 201",
+                        "id": "6107aa77f8b8a88494c21fcb793999b4",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "original txn type unchanged (DEPOSIT)": {
+                        "path": "::REV-02 | Original transaction is not modified after reversal::original txn type unchanged (DEPOSIT)",
+                        "id": "978a592ac1e77657e57622aaf7be0f1b",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "original txn type unchanged (DEPOSIT)"
+                    },
+                    "original txn status unchanged": {
+                        "path": "::REV-02 | Original transaction is not modified after reversal::original txn status unchanged",
+                        "id": "6d8db2f605deee715d0adb744d9d197b",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "original txn status unchanged"
+                    }
+                },
+                "name": "REV-02 | Original transaction is not modified after reversal",
+                "path": "::REV-02 | Original transaction is not modified after reversal",
+                "id": "c7c29504d00be2dd188be7ea6b79f926",
+                "groups": {}
+            },
+            "REV-03 | Reverse a transfer (both legs atomically)": {
+                "name": "REV-03 | Reverse a transfer (both legs atomically)",
+                "path": "::REV-03 | Reverse a transfer (both legs atomically)",
+                "id": "d321550e1223b059ffa4775eee116361",
+                "groups": {},
+                "checks": {
+                        "setup: register 201": {
+                            "fails": 0,
+                            "name": "setup: register 201",
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::setup: register 201",
+                            "id": "4d6f19838916a882fa496e6071c981d8",
+                            "passes": 1
+                        },
+                        "setup: login 200": {
+                            "id": "677bf4a0094a8f81932b1095b39055c4",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "setup: login 200",
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::setup: login 200"
+                        },
+                        "setup: account created 201": {
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::setup: account created 201",
+                            "id": "efd2a384447930142e958c69ff4c8c20",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "setup: account created 201"
+                        },
+                        "reverse-transfer returns 201": {
+                            "name": "reverse-transfer returns 201",
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::reverse-transfer returns 201",
+                            "id": "b1a9c1209ef52449324dd672397bfdd8",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "response contains 2 reversal entries": {
+                            "name": "response contains 2 reversal entries",
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::response contains 2 reversal entries",
+                            "id": "294a7d5942192488fc5b0760a1bb3da8",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "both entries are REVERSAL type": {
+                            "name": "both entries are REVERSAL type",
+                            "path": "::REV-03 | Reverse a transfer (both legs atomically)::both entries are REVERSAL type",
+                            "id": "b5300d31c47534fd1515beb43942ad47",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "REV-04 | Double reversal of same transaction is rejected": {
+                "path": "::REV-04 | Double reversal of same transaction is rejected",
+                "id": "615dbe9936ef90c453d069e97426aa84",
+                "groups": {},
+                "checks": {
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::REV-04 | Double reversal of same transaction is rejected::setup: deposit 201",
+                            "id": "753d2f0674ccc0209f9aa8728cc8cfee",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "double reversal returns 4xx": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "double reversal returns 4xx",
+                            "path": "::REV-04 | Double reversal of same transaction is rejected::double reversal returns 4xx",
+                            "id": "1c6bfad39eb46276e89f01cbdb5a7db9"
+                        }
+                    },
+                "name": "REV-04 | Double reversal of same transaction is rejected"
+            },
+            "REV-05 | Reversing non-existent transaction returns 404": {
+                "name": "REV-05 | Reversing non-existent transaction returns 404",
+                "path": "::REV-05 | Reversing non-existent transaction returns 404",
+                "id": "4513189e710eca951e81d0b183a8b9ee",
+                "groups": {},
+                "checks": {
+                        "fake txnId returns 404": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "fake txnId returns 404",
+                            "path": "::REV-05 | Reversing non-existent transaction returns 404::fake txnId returns 404",
+                            "id": "560241a7b96f73c5bd99147ef446b8e3"
+                        }
+                    }
+            },
+            "REV-06 | Missing originalTransactionId returns 400": {
+                "path": "::REV-06 | Missing originalTransactionId returns 400",
+                "id": "c01075eeccbdb88c0b80cc39c75aa01a",
+                "groups": {},
+                "checks": {
+                        "missing originalTransactionId returns 400": {
+                            "name": "missing originalTransactionId returns 400",
+                            "path": "::REV-06 | Missing originalTransactionId returns 400::missing originalTransactionId returns 400",
+                            "id": "f6eaf886d950181ee66742e889007177",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "REV-06 | Missing originalTransactionId returns 400"
+            },
+            "REV-07 | Reversal without auth token returns 401/403": {
+                "groups": {},
+                "checks": {
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::REV-07 | Reversal without auth token returns 401/403::setup: deposit 201",
+                            "id": "878fb82d4d3c4550ffa6d85584e5caf3",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "no-token reversal returns 401 or 403": {
+                            "name": "no-token reversal returns 401 or 403",
+                            "path": "::REV-07 | Reversal without auth token returns 401/403::no-token reversal returns 401 or 403",
+                            "id": "5b3285012d84f8f6be1a6e795294120a",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "REV-07 | Reversal without auth token returns 401/403",
+                "path": "::REV-07 | Reversal without auth token returns 401/403",
+                "id": "58ab27759f82d0d00dcfbf394b1ed48e"
+            },
+            "REV-08 | Reversing a reversal transaction is rejected": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "setup: deposit 201",
+                        "path": "::REV-08 | Reversing a reversal transaction is rejected::setup: deposit 201",
+                        "id": "cd54c17bfd839dca045421d7ca8cebb7"
+                    },
+                    "reversing a reversal returns 4xx": {
+                        "name": "reversing a reversal returns 4xx",
+                        "path": "::REV-08 | Reversing a reversal transaction is rejected::reversing a reversal returns 4xx",
+                        "id": "585c63245d0f8d9a79e30527a1962975",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "REV-08 | Reversing a reversal transaction is rejected",
+                "path": "::REV-08 | Reversing a reversal transaction is rejected",
+                "id": "0b9e63962d41294d9aa78be5041a4b53",
+                "groups": {}
+            },
+            "REV-09 | Reversal entry references original transaction ID": {
+                "name": "REV-09 | Reversal entry references original transaction ID",
+                "path": "::REV-09 | Reversal entry references original transaction ID",
+                "id": "dd6cb66f81cb2ba14b14e9261efd6ecf",
+                "groups": {},
+                "checks": {
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::REV-09 | Reversal entry references original transaction ID::setup: deposit 201",
+                            "id": "88265681e08d38aa96c9baa0f58c8d0c",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "referenceTransactionId matches original": {
+                            "name": "referenceTransactionId matches original",
+                            "path": "::REV-09 | Reversal entry references original transaction ID::referenceTransactionId matches original",
+                            "id": "fed2f9dcbc61fce5bdd612266d75a2ad",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "REV-10 | Both original and reversal transactions appear in ledger": {
+                "name": "REV-10 | Both original and reversal transactions appear in ledger",
+                "path": "::REV-10 | Both original and reversal transactions appear in ledger",
+                "id": "f0b3477cd421103f2a819d6aaaac5c53",
+                "groups": {},
+                "checks": {
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::REV-10 | Both original and reversal transactions appear in ledger::setup: deposit 201",
+                            "id": "e44eae42befa3cbe98ddfd49ebaefc41",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "original txn still in ledger": {
+                            "name": "original txn still in ledger",
+                            "path": "::REV-10 | Both original and reversal transactions appear in ledger::original txn still in ledger",
+                            "id": "6b377fad0e55e76072e51f9669855200",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "reversal txn in ledger": {
+                            "path": "::REV-10 | Both original and reversal transactions appear in ledger::reversal txn in ledger",
+                            "id": "9395368aa5c3e8a8681cc61d81a86495",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "reversal txn in ledger"
+                        }
+                    }
+            }
+        },
+        "checks": {
+            "setup: register 201": {
+                "name": "setup: register 201",
+                "path": "::setup: register 201",
+                "id": "318977f969f143ded6615dc8c3347607",
+                "passes": 1,
+                "fails": 0
+            },
+            "setup: login 200": {
+                "passes": 1,
+                "fails": 0,
+                "name": "setup: login 200",
+                "path": "::setup: login 200",
+                "id": "c628dd272ab277a51676393b21166ea1"
+            },
+            "setup: account created 201": {
+                "path": "::setup: account created 201",
+                "id": "a9d500fed97141f29b9505244cf85c1b",
+                "passes": 1,
+                "fails": 0,
+                "name": "setup: account created 201"
+            },
+            "setup: deposit 201": {
+                "name": "setup: deposit 201",
+                "path": "::setup: deposit 201",
+                "id": "b5a60bb08647c8d14e59bce319c2225b",
+                "passes": 1,
+                "fails": 0
+            }
+        }
+    },
+    "metrics": {
+        "checks": {
+            "passes": 31,
+            "fails": 0,
+            "value": 1
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0,
+            "max": 27.7333,
+            "p(90)": 1.11988,
+            "p(95)": 1.2087399999999997,
+            "avg": 1.0772862068965516
+        },
+        "http_req_waiting": {
+            "p(90)": 118.49906,
+            "p(95)": 125.25028,
+            "avg": 44.413913793103454,
+            "min": 6.3439,
+            "med": 29.2465,
+            "max": 160.8477
+        },
+        "vus": {
+            "min": 1,
+            "max": 1,
+            "value": 1
+        },
+        "data_sent": {
+            "count": 12868,
+            "rate": 9229.201054429765
+        },
+        "http_req_duration": {
+            "p(90)": 121.03264,
+            "p(95)": 127.84215999999999,
+            "avg": 46.44773793103448,
+            "min": 6.3439,
+            "med": 31.1048,
+            "max": 162.0824,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_sending": {
+            "avg": 0.07418275862068965,
+            "min": 0,
+            "med": 0,
+            "max": 0.5636,
+            "p(90)": 0.51364,
+            "p(95)": 0.54088
+        },
+        "http_req_receiving": {
+            "max": 2.7837,
+            "p(90)": 2.59258,
+            "p(95)": 2.63332,
+            "avg": 1.959641379310345,
+            "min": 0,
+            "med": 2.0653
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "iteration_duration": {
+            "max": 1394.2702,
+            "p(90)": 1394.2702,
+            "p(95)": 1394.2702,
+            "avg": 1394.2702,
+            "min": 1394.2702,
+            "med": 1394.2702
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.717221095308499
+        },
+        "http_req_connecting": {
+            "avg": 0.1351344827586207,
+            "min": 0,
+            "med": 0,
+            "max": 1.123,
+            "p(90)": 0.6742399999999996,
+            "p(95)": 1.11626
+        },
+        "http_req_failed": {
+            "passes": 5,
+            "fails": 24,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 0.1724137931034483
+        },
+        "http_req_tls_handshaking": {
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0
+        },
+        "group_duration": {
+            "p(90)": 132.3947999999999,
+            "p(95)": 281.3501999999997,
+            "avg": 102.45788,
+            "min": 15.7776,
+            "med": 81.75145,
+            "max": 430.3056
+        },
+        "http_reqs": {
+            "count": 29,
+            "rate": 20.799411763946473
+        },
+        "http_req_duration{expected_response:true}": {
+            "min": 24.804,
+            "med": 34.524,
+            "max": 162.0824,
+            "p(90)": 124.37823999999999,
+            "p(95)": 128.44906,
+            "avg": 52.04832916666666
+        },
+        "data_received": {
+            "rate": 20300.943102707064,
+            "count": 28305
+        }
+    }
+}

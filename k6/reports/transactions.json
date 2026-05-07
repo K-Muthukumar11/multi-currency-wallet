@@ -1,0 +1,424 @@
+{
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "TXN-01 | Authenticated user can list own transactions": {
+                "name": "TXN-01 | Authenticated user can list own transactions",
+                "path": "::TXN-01 | Authenticated user can list own transactions",
+                "id": "63a6925c025612b76b7625735f1d4e27",
+                "groups": {},
+                "checks": {
+                        "list transactions returns 200": {
+                            "name": "list transactions returns 200",
+                            "path": "::TXN-01 | Authenticated user can list own transactions::list transactions returns 200",
+                            "id": "1f2ca14dfc0641efabe85b77d08db8e2",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "response is array": {
+                            "name": "response is array",
+                            "path": "::TXN-01 | Authenticated user can list own transactions::response is array",
+                            "id": "dded9659d3b478ba07bebcda755210e2",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "at least 2 transactions present": {
+                            "name": "at least 2 transactions present",
+                            "path": "::TXN-01 | Authenticated user can list own transactions::at least 2 transactions present",
+                            "id": "b54a595cfbdb244d9111637d17344a2e",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "TXN-02 | Get transactions by account ID (paginated)": {
+                "checks": {
+                    "account txns returns 200": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "account txns returns 200",
+                        "path": "::TXN-02 | Get transactions by account ID (paginated)::account txns returns 200",
+                        "id": "0f06cdc7b656056d1ee5a74b3c313035"
+                    },
+                    "has content field (Page)": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "has content field (Page)",
+                        "path": "::TXN-02 | Get transactions by account ID (paginated)::has content field (Page)",
+                        "id": "62a6c298fb2644213c59034ca6b8b870"
+                    },
+                    "content is array": {
+                        "fails": 0,
+                        "name": "content is array",
+                        "path": "::TXN-02 | Get transactions by account ID (paginated)::content is array",
+                        "id": "f9de1dd3b45db74d62f8dcb265d77027",
+                        "passes": 1
+                    },
+                    "has totalElements": {
+                        "path": "::TXN-02 | Get transactions by account ID (paginated)::has totalElements",
+                        "id": "9f39c9021daae341bc4cb213bcbf15d6",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "has totalElements"
+                    }
+                },
+                "name": "TXN-02 | Get transactions by account ID (paginated)",
+                "path": "::TXN-02 | Get transactions by account ID (paginated)",
+                "id": "d43f52dc910c7c1e30e074711017bc40",
+                "groups": {}
+            },
+            "TXN-03 | Transaction response has all required fields": {
+                "checks": {
+                    "txn has id": {
+                        "name": "txn has id",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has id",
+                        "id": "9d9f1ddb9497a0a8a86dd49e622904ee",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "txn has accountId": {
+                        "name": "txn has accountId",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has accountId",
+                        "id": "23acb565be3cfc6e53b643e7f1186222",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "txn has type": {
+                        "name": "txn has type",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has type",
+                        "id": "a2913615f3684db20332227a318c87b4",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "txn has amount": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "txn has amount",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has amount",
+                        "id": "2dcff3b5ce8995b29114287e58f1ba7a"
+                    },
+                    "txn has currencyCode": {
+                        "name": "txn has currencyCode",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has currencyCode",
+                        "id": "5cf0f80026a9092bdcbcdb486e46adab",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "txn has balanceAfter": {
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "txn has balanceAfter",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has balanceAfter",
+                        "id": "ae7514179404db306e7aafa7a7e76a95"
+                    },
+                    "txn has status": {
+                        "id": "d57ccd5e0b49ea0eb66a984df417b5fc",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "txn has status",
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has status"
+                    },
+                    "txn has createdAt": {
+                        "path": "::TXN-03 | Transaction response has all required fields::txn has createdAt",
+                        "id": "c00a7702989ad07d7b827af1b7de9afe",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "txn has createdAt"
+                    }
+                },
+                "name": "TXN-03 | Transaction response has all required fields",
+                "path": "::TXN-03 | Transaction response has all required fields",
+                "id": "568e5de5602d59cc0172d6c72414ab7b",
+                "groups": {}
+            },
+            "TXN-04 | Transfer creates ledger entries for both parties": {
+                "name": "TXN-04 | Transfer creates ledger entries for both parties",
+                "path": "::TXN-04 | Transfer creates ledger entries for both parties",
+                "id": "95fe7007cf72227a8951049a5670f55e",
+                "groups": {},
+                "checks": {
+                        "setup: register 201": {
+                            "name": "setup: register 201",
+                            "path": "::TXN-04 | Transfer creates ledger entries for both parties::setup: register 201",
+                            "id": "751bd5ae53ff1ed700c285566cdcaa24",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "setup: login 200": {
+                            "name": "setup: login 200",
+                            "path": "::TXN-04 | Transfer creates ledger entries for both parties::setup: login 200",
+                            "id": "ef2967f68eafa095ecc8698df7eac990",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "setup: account created 201": {
+                            "name": "setup: account created 201",
+                            "path": "::TXN-04 | Transfer creates ledger entries for both parties::setup: account created 201",
+                            "id": "3aebf6d2a8cc027d28be4ef44bcc7a4c",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "sender ledger has TRANSFER_DEBIT": {
+                            "name": "sender ledger has TRANSFER_DEBIT",
+                            "path": "::TXN-04 | Transfer creates ledger entries for both parties::sender ledger has TRANSFER_DEBIT",
+                            "id": "63cd8a685c165cbbd0442c13e504f7ef",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "receiver ledger has TRANSFER_CREDIT": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "receiver ledger has TRANSFER_CREDIT",
+                            "path": "::TXN-04 | Transfer creates ledger entries for both parties::receiver ledger has TRANSFER_CREDIT",
+                            "id": "bda7035b73984dd5c63f5fd201e19424"
+                        }
+                    }
+            },
+            "TXN-05 | Pagination: page size is respected": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "name": "setup: deposit 201",
+                        "path": "::TXN-05 | Pagination: page size is respected::setup: deposit 201",
+                        "id": "150f653e93ccd356fed49bbefc1f6e75",
+                        "passes": 5,
+                        "fails": 0
+                    },
+                    "page=0 size=3 returns 200": {
+                        "fails": 0,
+                        "name": "page=0 size=3 returns 200",
+                        "path": "::TXN-05 | Pagination: page size is respected::page=0 size=3 returns 200",
+                        "id": "593c15c84b9030c9c144c4bc6893b919",
+                        "passes": 1
+                    },
+                    "content has at most 3 items": {
+                        "name": "content has at most 3 items",
+                        "path": "::TXN-05 | Pagination: page size is respected::content has at most 3 items",
+                        "id": "4ee02684126e31e8815b3d97fc47d2c4",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "TXN-05 | Pagination: page size is respected",
+                "path": "::TXN-05 | Pagination: page size is respected",
+                "id": "a14e464eecbaf0890edeb8eced510dfc",
+                "groups": {}
+            },
+            "TXN-06 | Transactions sorted newest-first by default": {
+                "name": "TXN-06 | Transactions sorted newest-first by default",
+                "path": "::TXN-06 | Transactions sorted newest-first by default",
+                "id": "364f01e7482e4dd3159e88dedf10483b",
+                "groups": {},
+                "checks": {
+                        "first txn is newer or equal to second": {
+                            "path": "::TXN-06 | Transactions sorted newest-first by default::first txn is newer or equal to second",
+                            "id": "d5d44a35ecea34679b1df5f5d0a60fdc",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "first txn is newer or equal to second"
+                        }
+                    }
+            },
+            "TXN-07 | Listing transactions without auth returns 401/403": {
+                "name": "TXN-07 | Listing transactions without auth returns 401/403",
+                "path": "::TXN-07 | Listing transactions without auth returns 401/403",
+                "id": "5c060f7e78413b5f928af03fa3ce7c53",
+                "groups": {},
+                "checks": {
+                        "no-token list returns 401 or 403": {
+                            "fails": 0,
+                            "name": "no-token list returns 401 or 403",
+                            "path": "::TXN-07 | Listing transactions without auth returns 401/403::no-token list returns 401 or 403",
+                            "id": "1389f9219b77aeefa4f215f36e143f55",
+                            "passes": 1
+                        }
+                    }
+            },
+            "TXN-08 | Transactions for non-existent accountId returns 404": {
+                "path": "::TXN-08 | Transactions for non-existent accountId returns 404",
+                "id": "1eb83e993321e98b1e0f9304d7dafed7",
+                "groups": {},
+                "checks": {
+                        "fake accountId returns 404": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "fake accountId returns 404",
+                            "path": "::TXN-08 | Transactions for non-existent accountId returns 404::fake accountId returns 404",
+                            "id": "6da10230480337a728486cb012abad5d"
+                        }
+                    },
+                "name": "TXN-08 | Transactions for non-existent accountId returns 404"
+            },
+            "TXN-09 | No DELETE /transactions endpoint (immutability)": {
+                "name": "TXN-09 | No DELETE /transactions endpoint (immutability)",
+                "path": "::TXN-09 | No DELETE /transactions endpoint (immutability)",
+                "id": "5df649aaa781e56dd73e569e59691b20",
+                "groups": {},
+                "checks": {
+                        "DELETE /transactions/{id} returns 404 or 405": {
+                            "id": "32c0360abc1d21160ce2e7172f58f1d1",
+                            "passes": 0,
+                            "fails": 1,
+                            "name": "DELETE /transactions/{id} returns 404 or 405",
+                            "path": "::TXN-09 | No DELETE /transactions endpoint (immutability)::DELETE /transactions/{id} returns 404 or 405"
+                        }
+                    }
+            }
+        },
+        "checks": {
+            "setup: register 201": {
+                "passes": 1,
+                "fails": 0,
+                "name": "setup: register 201",
+                "path": "::setup: register 201",
+                "id": "318977f969f143ded6615dc8c3347607"
+            },
+            "setup: login 200": {
+                "fails": 0,
+                "name": "setup: login 200",
+                "path": "::setup: login 200",
+                "id": "c628dd272ab277a51676393b21166ea1",
+                "passes": 1
+            },
+            "setup: account created 201": {
+                "name": "setup: account created 201",
+                "path": "::setup: account created 201",
+                "id": "a9d500fed97141f29b9505244cf85c1b",
+                "passes": 1,
+                "fails": 0
+            },
+            "setup: deposit 201": {
+                "name": "setup: deposit 201",
+                "path": "::setup: deposit 201",
+                "id": "b5a60bb08647c8d14e59bce319c2225b",
+                "passes": 2,
+                "fails": 0
+            }
+        }
+    },
+    "metrics": {
+        "http_req_receiving": {
+            "avg": 1.9338920000000002,
+            "min": 0.5028,
+            "med": 1.9933,
+            "max": 3.421,
+            "p(90)": 2.3943000000000003,
+            "p(95)": 2.6514999999999995
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 1.1275,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0.0451,
+            "min": 0
+        },
+        "iteration_duration": {
+            "avg": 1425.4474,
+            "min": 1425.4474,
+            "med": 1425.4474,
+            "max": 1425.4474,
+            "p(90)": 1425.4474,
+            "p(95)": 1425.4474
+        },
+        "data_sent": {
+            "count": 10041,
+            "rate": 7044.1041879202285
+        },
+        "http_req_waiting": {
+            "avg": 53.12329200000001,
+            "min": 3.6173,
+            "med": 30.6941,
+            "max": 273.6443,
+            "p(90)": 118.36372,
+            "p(95)": 124.02691999999998
+        },
+        "data_received": {
+            "count": 25283,
+            "rate": 17736.887380060463
+        },
+        "http_req_duration": {
+            "avg": 55.100716000000006,
+            "min": 4.1201,
+            "med": 32.5011,
+            "max": 275.7082,
+            "p(90)": 120.48454000000001,
+            "p(95)": 126.13441999999999,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0,
+            "max": 34.2681,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 1.3707239999999998
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.7015341288636817
+        },
+        "http_req_failed": {
+            "passes": 3,
+            "fails": 22,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 0.12
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 275.7082,
+            "p(90)": 120.69661,
+            "p(95)": 127.140755,
+            "avg": 60.85865909090909,
+            "min": 24.3038,
+            "med": 33.141149999999996
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_tls_handshaking": {
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0
+        },
+        "http_req_sending": {
+            "avg": 0.043531999999999994,
+            "min": 0,
+            "med": 0,
+            "max": 0.5495,
+            "p(90)": 0,
+            "p(95)": 0.4310399999999984
+        },
+        "group_duration": {
+            "max": 405.1508,
+            "p(90)": 253.06720000000004,
+            "p(95)": 329.1089999999999,
+            "avg": 95.8125888888889,
+            "min": 4.1201,
+            "med": 29.3726
+        },
+        "http_reqs": {
+            "count": 25,
+            "rate": 17.538353221592043
+        },
+        "checks": {
+            "passes": 35,
+            "fails": 1,
+            "value": 0.9722222222222222
+        }
+    }
+}

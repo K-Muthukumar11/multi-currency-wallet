@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>k6 Wallet Test Report</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e2e8f0; }
+    a { color: #63b3ed; }
+
+    header { background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%); padding: 24px 32px; border-bottom: 2px solid #4a5568; }
+    header h1 { font-size: 1.8rem; color: #90cdf4; }
+    header .subtitle { color: #a0aec0; margin-top: 4px; font-size: 0.9rem; }
+    .overall-badge { display: inline-block; margin-top: 10px; padding: 4px 16px; border-radius: 20px; font-weight: 700; font-size: 1rem; }
+    .overall-pass { background: #276749; color: #9ae6b4; }
+    .overall-fail { background: #742a2a; color: #feb2b2; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+    .summary-bar { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+    .summary-item { flex: 1; min-width: 140px; background: #1a202c; border-radius: 10px; padding: 16px; border: 1px solid #2d3748; text-align: center; }
+    .summary-item .s-label { color: #a0aec0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+    .summary-item .s-value { font-size: 2rem; font-weight: 700; margin-top: 6px; }
+    .s-pass { color: #68d391; }
+    .s-fail { color: #fc8181; }
+    .s-neutral { color: #63b3ed; }
+
+    .suite-card { background: #1a202c; border-radius: 12px; margin-bottom: 24px; overflow: hidden; border: 1px solid #2d3748; }
+    .suite-pass { border-left: 5px solid #48bb78; }
+    .suite-fail { border-left: 5px solid #fc8181; }
+    .suite-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 18px 20px; background: #171923; }
+    .suite-header h2 { font-size: 1.1rem; color: #e2e8f0; display: flex; align-items: center; gap: 10px; }
+    .check-summary { color: #a0aec0; font-size: 0.85rem; }
+
+    .badge { padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    .pass { background: #276749; color: #9ae6b4; }
+    .fail { background: #742a2a; color: #feb2b2; }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px 20px; }
+    .metric-box { background: #171923; border-radius: 8px; padding: 12px 14px; border: 1px solid #2d3748; }
+    .metric-label { color: #718096; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-value { font-size: 1.25rem; font-weight: 600; margin-top: 4px; color: #90cdf4; }
+
+    details { border-top: 1px solid #2d3748; }
+    summary { padding: 12px 20px; cursor: pointer; user-select: none; color: #90cdf4; font-weight: 600; font-size: 0.9rem; }
+    summary:hover { background: #171923; }
+    .table-wrap { overflow-x: auto; padding: 0 20px 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: #171923; color: #a0aec0; text-align: left; padding: 8px 12px; border-bottom: 2px solid #2d3748; }
+    td { padding: 7px 12px; border-bottom: 1px solid #2d3748; }
+    tr:hover td { background: #171923; }
+    .pass-text { color: #68d391; font-weight: 600; }
+    .fail-text { color: #fc8181; font-weight: 600; }
+
+    footer { text-align: center; padding: 24px; color: #4a5568; font-size: 0.8rem; border-top: 1px solid #2d3748; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏦 Multi-Currency Wallet — k6 Test Report</h1>
+    <div class="subtitle">Generated: 7/5/2026, 9:21:21 am · 8 test suite(s) · 177 total HTTP requests</div>
+    <div class="overall-badge overall-fail">
+      ✗ SOME CHECKS FAILED
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="summary-bar">
+      <div class="summary-item">
+        <div class="s-label">Total Checks</div>
+        <div class="s-value s-neutral">231</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Passed</div>
+        <div class="s-value s-pass">229</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Failed</div>
+        <div class="s-value s-fail">2</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Pass Rate</div>
+        <div class="s-value s-fail">99.1%</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">HTTP Requests</div>
+        <div class="s-value s-neutral">177</div>
+      </div>
+    </div>
+
+    
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>smoke <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">15 / 15 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">8</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">417.7 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">1691.3 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (15 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>SMOKE-01 | Register › register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-02 | Login › login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-03 | Create USD account A › create USD account 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-04 | Create USD account B › create USD account B 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-05 | Deposit 1000 USD into account A › deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-05 | Deposit 1000 USD into account A › balance is 1000</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-05 | Deposit 1000 USD into account A › type is DEPOSIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-06 | Transfer 300 USD A → B › transfer 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-06 | Transfer 300 USD A → B › debit balanceAfter is 700</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-06 | Transfer 300 USD A → B › credit balanceAfter is 300</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-07 | List my transactions › list 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-07 | List my transactions › at least 3 entries</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-07 | List my transactions › has DEPOSIT type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-07 | List my transactions › has TRANSFER_DEBIT type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>SMOKE-07 | List my transactions › has TRANSFER_CREDIT type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>auth <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">11 / 11 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">12</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">93.3 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">184.2 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (11 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>AUTH-01 | Register new user › register returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-01 | Register new user › response has token</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-02 | Login with valid credentials › login returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-02 | Login with valid credentials › response has token</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-03 | Duplicate email registration is rejected › duplicate register returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-04 | Login with wrong password returns 401 › wrong password returns 401</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-05 | Login with non-existent user returns 401 › non-existent user returns 401</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-06 | Register with missing required fields returns 400 › empty register returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-07 | Register with invalid email format returns 400 › invalid email returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-08 | Register with short password returns 400 › short password returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>AUTH-09 | Protected route without token returns 401/403 › no-token protected route rejected</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>accounts <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">22 / 22 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">16</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">60.6 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">173.7 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (22 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › create account returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › response has accountNumber</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › response has id</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › response balance is 0</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › response status is ACTIVE</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-01 | Create USD account › response currencyCode is USD</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-02 | Create EUR account (multi-currency support) › EUR account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-02 | Create EUR account (multi-currency support) › currency is EUR</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-03 | Create INR account (ISO 4217 currency) › INR account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-03 | Create INR account (ISO 4217 currency) › currency is INR</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-04 | List my accounts returns all created accounts › list accounts returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-04 | List my accounts returns all created accounts › response is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-04 | List my accounts returns all created accounts › list contains at least 2 items</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-05 | Currency code too short returns 400 › short currency code returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-06 | Currency code too long returns 400 › long currency code returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-07 | Empty currency code returns 400 › empty currency code returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-08 | Create account without auth token returns 401/403 › no token returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-09 | User only sees their own accounts › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-09 | User only sees their own accounts › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>ACC-09 | User only sees their own accounts › can't see other user's accounts - list is own</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>deposit <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">40 / 40 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">31</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">28.6 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">85.7 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">–</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (37 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit txn present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit txn present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit type is TRANSFER_DEBIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit type is TRANSFER_CREDIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit amount is 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit amount is 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit status is COMPLETED</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit status is COMPLETED</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-02 | Sender balance decremented correctly › second transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-02 | Sender balance decremented correctly › sender balanceAfter reflects deduction</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-03 | Transfer exact remaining balance succeeds › exact balance transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › 3dp transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › debit amount is 10.005</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-05 | Transfer more than available balance returns 422 › insufficient funds returns 422</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › cross-currency transfer returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-07 | Wrong currencyCode in request body returns 4xx › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-07 | Wrong currencyCode in request body returns 4xx › currency mismatch returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-08 | Self-transfer is rejected › self-transfer returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-09 | Non-existent source account returns 404 › non-existent source returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-10 | Non-existent destination account returns 404 › non-existent destination returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-11 | Zero amount transfer is rejected › zero amount returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-12 | Negative amount transfer is rejected › negative amount returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-13 | Missing sourceAccountNumber returns 400 › missing source returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-14 | Transfer without auth token returns 401/403 › no-token transfer returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › sender has TRANSFER_DEBIT entry</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › receiver has TRANSFER_CREDIT entry</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-fail">
+    <div class="suite-header">
+      <h2>transfer <span class="badge fail">FAILED</span></h2>
+      <span class="check-summary">39 / 40 checks passed (97.5%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">31</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">58.6 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">163.6 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (37 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit txn present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit txn present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit type is TRANSFER_DEBIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit type is TRANSFER_CREDIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit amount is 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit amount is 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › debit status is COMPLETED</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-01 | Transfer funds between two USD accounts › credit status is COMPLETED</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-02 | Sender balance decremented correctly › second transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-02 | Sender balance decremented correctly › sender balanceAfter reflects deduction</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-03 | Transfer exact remaining balance succeeds › exact balance transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › 3dp transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-04 | Transfer with 3-decimal precision › debit amount is 10.005</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-05 | Transfer more than available balance returns 422 › insufficient funds returns 422</td>
+        <td class="fail-text">✗</td>
+        <td>0</td>
+        <td>1</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-06 | Cross-currency transfer is rejected › cross-currency transfer returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-07 | Wrong currencyCode in request body returns 4xx › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-07 | Wrong currencyCode in request body returns 4xx › currency mismatch returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-08 | Self-transfer is rejected › self-transfer returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-09 | Non-existent source account returns 404 › non-existent source returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-10 | Non-existent destination account returns 404 › non-existent destination returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-11 | Zero amount transfer is rejected › zero amount returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-12 | Negative amount transfer is rejected › negative amount returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-13 | Missing sourceAccountNumber returns 400 › missing source returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-14 | Transfer without auth token returns 401/403 › no-token transfer returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › sender has TRANSFER_DEBIT entry</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TRF-15 | Atomicity — both debit and credit appear in ledger › receiver has TRANSFER_CREDIT entry</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-fail">
+    <div class="suite-header">
+      <h2>transactions <span class="badge fail">FAILED</span></h2>
+      <span class="check-summary">35 / 36 checks passed (97.2%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">25</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">55.1 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">126.1 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (31 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › list transactions returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › response is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › at least 2 transactions present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › account txns returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › has content field (Page)</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › content is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › has totalElements</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has id</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has accountId</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has amount</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has currencyCode</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has balanceAfter</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has status</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has createdAt</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › sender ledger has TRANSFER_DEBIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › receiver ledger has TRANSFER_CREDIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>5</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › page=0 size=3 returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › content has at most 3 items</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-06 | Transactions sorted newest-first by default › first txn is newer or equal to second</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-07 | Listing transactions without auth returns 401/403 › no-token list returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-08 | Transactions for non-existent accountId returns 404 › fake accountId returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-09 | No DELETE /transactions endpoint (immutability) › DELETE /transactions/{id} returns 404 or 405</td>
+        <td class="fail-text">✗</td>
+        <td>0</td>
+        <td>1</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>reversals <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">31 / 31 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">29</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">46.4 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">127.8 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">1</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (31 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-01 | Reverse a deposit creates a reversal entry › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-01 | Reverse a deposit creates a reversal entry › reversal returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-01 | Reverse a deposit creates a reversal entry › response is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-01 | Reverse a deposit creates a reversal entry › reversal entry has referenceTransactionId</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-01 | Reverse a deposit creates a reversal entry › reversal type contains REVERSAL</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-02 | Original transaction is not modified after reversal › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-02 | Original transaction is not modified after reversal › original txn type unchanged (DEPOSIT)</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-02 | Original transaction is not modified after reversal › original txn status unchanged</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › reverse-transfer returns 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › response contains 2 reversal entries</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-03 | Reverse a transfer (both legs atomically) › both entries are REVERSAL type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-04 | Double reversal of same transaction is rejected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-04 | Double reversal of same transaction is rejected › double reversal returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-05 | Reversing non-existent transaction returns 404 › fake txnId returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-06 | Missing originalTransactionId returns 400 › missing originalTransactionId returns 400</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-07 | Reversal without auth token returns 401/403 › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-07 | Reversal without auth token returns 401/403 › no-token reversal returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-08 | Reversing a reversal transaction is rejected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-08 | Reversing a reversal transaction is rejected › reversing a reversal returns 4xx</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-09 | Reversal entry references original transaction ID › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-09 | Reversal entry references original transaction ID › referenceTransactionId matches original</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-10 | Both original and reversal transactions appear in ledger › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-10 | Both original and reversal transactions appear in ledger › original txn still in ledger</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>REV-10 | Both original and reversal transactions appear in ledger › reversal txn in ledger</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="suite-card suite-pass">
+    <div class="suite-header">
+      <h2>load <span class="badge pass">PASSED</span></h2>
+      <span class="check-summary">36 / 36 checks passed (100.0%)</span>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Total Requests</div>
+        <div class="metric-value">25</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Failed Requests</div>
+        <div class="metric-value ">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Avg Response</div>
+        <div class="metric-value">22.4 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p95 Latency</div>
+        <div class="metric-value ">89.5 ms</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">p99 Latency</div>
+        <div class="metric-value">–</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Max VUs</div>
+        <div class="metric-value">–</div>
+      </div>
+    </div>
+
+    <details open>
+      <summary>Check Results (31 checks)</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th><th>Passes</th><th>Fails</th></tr></thead>
+          <tbody><tr>
+        <td>setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>2</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › list transactions returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › response is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-01 | Authenticated user can list own transactions › at least 2 transactions present</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › account txns returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › has content field (Page)</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › content is array</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-02 | Get transactions by account ID (paginated) › has totalElements</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has id</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has accountId</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has type</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has amount</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has currencyCode</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has balanceAfter</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has status</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-03 | Transaction response has all required fields › txn has createdAt</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: register 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: login 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › setup: account created 201</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › sender ledger has TRANSFER_DEBIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-04 | Transfer creates ledger entries for both parties › receiver ledger has TRANSFER_CREDIT</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › setup: deposit 201</td>
+        <td class="pass-text">✓</td>
+        <td>5</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › page=0 size=3 returns 200</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-05 | Pagination: page size is respected › content has at most 3 items</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-06 | Transactions sorted newest-first by default › first txn is newer or equal to second</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-07 | Listing transactions without auth returns 401/403 › no-token list returns 401 or 403</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-08 | Transactions for non-existent account number returns 404 › fake accountNumber returns 404</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr><tr>
+        <td>TXN-09 | No DELETE /transactions endpoint (immutability) › DELETE /transactions/{id} returns 404 or 405</td>
+        <td class="pass-text">✓</td>
+        <td>1</td>
+        <td>0</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+  </div>
+
+  <footer>
+    Mini Wallet Banking System · k6 Performance &amp; Functional Tests · Baton Systems
+  </footer>
+</body>
+</html>

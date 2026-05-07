@@ -1,0 +1,302 @@
+{
+    "metrics": {
+        "http_req_waiting": {
+            "p(90)": 927.8290199999996,
+            "p(95)": 1684.5557599999988,
+            "avg": 414.1677375,
+            "min": 26.6795,
+            "med": 110.98535,
+            "max": 2441.2825
+        },
+        "http_req_receiving": {
+            "med": 3.1188000000000002,
+            "max": 8.4738,
+            "p(90)": 5.295869999999999,
+            "p(95)": 6.884834999999999,
+            "avg": 3.5040250000000004,
+            "min": 0.4478
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0,
+            "max": 29.6321,
+            "p(90)": 8.889629999999995,
+            "p(95)": 19.260864999999985,
+            "avg": 3.7040125
+        },
+        "http_req_failed": {
+            "passes": 1,
+            "fails": 7,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 0.125
+        },
+        "checks": {
+            "passes": 15,
+            "fails": 0,
+            "value": 1
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_reqs": {
+            "count": 8,
+            "rate": 2.3682353798616984
+        },
+        "data_received": {
+            "count": 6407,
+            "rate": 1896.6605098467378
+        },
+        "vus": {
+            "max": 1,
+            "value": 1,
+            "min": 1
+        },
+        "http_req_connecting": {
+            "avg": 0.157625,
+            "min": 0,
+            "med": 0,
+            "max": 1.261,
+            "p(90)": 0.37829999999999975,
+            "p(95)": 0.8196499999999992
+        },
+        "http_req_duration": {
+            "min": 29.3336,
+            "med": 114.84645,
+            "max": 2450.3634,
+            "p(90)": 932.3009799999996,
+            "p(95)": 1691.332189999999,
+            "avg": 417.74765,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 2450.3634,
+            "p(90)": 1149.1670400000007,
+            "p(95)": 1799.7652199999986,
+            "avg": 465.4068571428571,
+            "min": 29.3336,
+            "med": 135.0312
+        },
+        "group_duration": {
+            "max": 2481.5436,
+            "p(90)": 942.0134399999995,
+            "p(95)": 1711.7785199999987,
+            "avg": 421.98243750000006,
+            "min": 29.8502,
+            "med": 115.4262
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.2960294224827123
+        },
+        "http_req_sending": {
+            "min": 0,
+            "med": 0,
+            "max": 0.6071,
+            "p(90)": 0.18212999999999988,
+            "p(95)": 0.39461499999999966,
+            "avg": 0.0758875
+        },
+        "data_sent": {
+            "rate": 944.629887142335,
+            "count": 3191
+        },
+        "iteration_duration": {
+            "avg": 3377.4854,
+            "min": 3377.4854,
+            "med": 3377.4854,
+            "max": 3377.4854,
+            "p(90)": 3377.4854,
+            "p(95)": 3377.4854
+        },
+        "http_req_tls_handshaking": {
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0
+        }
+    },
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "SMOKE-01 | Register": {
+                "name": "SMOKE-01 | Register",
+                "path": "::SMOKE-01 | Register",
+                "id": "34930114e1464d566ac5d00874e779de",
+                "groups": {},
+                "checks": {
+                        "register 201": {
+                            "fails": 0,
+                            "name": "register 201",
+                            "path": "::SMOKE-01 | Register::register 201",
+                            "id": "2b37b303d200baac10d3470ec41676db",
+                            "passes": 1
+                        }
+                    }
+            },
+            "SMOKE-02 | Login": {
+                "name": "SMOKE-02 | Login",
+                "path": "::SMOKE-02 | Login",
+                "id": "72cf8b1b3dc120092f0ba178fab6d4cd",
+                "groups": {},
+                "checks": {
+                        "login 200": {
+                            "path": "::SMOKE-02 | Login::login 200",
+                            "id": "f5ad285ee756375231e95f4e7c438391",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "login 200"
+                        }
+                    }
+            },
+            "SMOKE-03 | Create USD account A": {
+                "name": "SMOKE-03 | Create USD account A",
+                "path": "::SMOKE-03 | Create USD account A",
+                "id": "4c18dfeb8f1363c20bc140a8090645ca",
+                "groups": {},
+                "checks": {
+                        "create USD account 201": {
+                            "fails": 0,
+                            "name": "create USD account 201",
+                            "path": "::SMOKE-03 | Create USD account A::create USD account 201",
+                            "id": "5b43c9d6dd3f6539d156dd8ad71a19c0",
+                            "passes": 1
+                        }
+                    }
+            },
+            "SMOKE-04 | Create USD account B": {
+                "id": "0e37d66786b6e27dc1889c8438af5194",
+                "groups": {},
+                "checks": {
+                        "create USD account B 201": {
+                            "name": "create USD account B 201",
+                            "path": "::SMOKE-04 | Create USD account B::create USD account B 201",
+                            "id": "b99841ea244f42064d7db1d71163eb83",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "SMOKE-04 | Create USD account B",
+                "path": "::SMOKE-04 | Create USD account B"
+            },
+            "SMOKE-05 | Deposit 1000 USD into account A": {
+                "path": "::SMOKE-05 | Deposit 1000 USD into account A",
+                "id": "8ffc6a6b174c00583684e307f6be082f",
+                "groups": {},
+                "checks": {
+                        "deposit 201": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "deposit 201",
+                            "path": "::SMOKE-05 | Deposit 1000 USD into account A::deposit 201",
+                            "id": "1f14bc3c786fbf1576a7df6055aa3b0b"
+                        },
+                        "balance is 1000": {
+                            "name": "balance is 1000",
+                            "path": "::SMOKE-05 | Deposit 1000 USD into account A::balance is 1000",
+                            "id": "2fead65ef544a60a5cb08b0eff3abc06",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "type is DEPOSIT": {
+                            "name": "type is DEPOSIT",
+                            "path": "::SMOKE-05 | Deposit 1000 USD into account A::type is DEPOSIT",
+                            "id": "8c5ce7a2089a0a7a51b6d07663f6e4eb",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "SMOKE-05 | Deposit 1000 USD into account A"
+            },
+            "SMOKE-06 | Transfer 300 USD A → B": {
+                "id": "e04b577c6dcf64252857b6b9663c1cb8",
+                "groups": {},
+                "checks": {
+                        "transfer 201": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "transfer 201",
+                            "path": "::SMOKE-06 | Transfer 300 USD A → B::transfer 201",
+                            "id": "96e45fd3398547420ebf3569d0d140f1"
+                        },
+                        "debit balanceAfter is 700": {
+                            "path": "::SMOKE-06 | Transfer 300 USD A → B::debit balanceAfter is 700",
+                            "id": "dd33dc20801001c6bbe71b691df23171",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "debit balanceAfter is 700"
+                        },
+                        "credit balanceAfter is 300": {
+                            "name": "credit balanceAfter is 300",
+                            "path": "::SMOKE-06 | Transfer 300 USD A → B::credit balanceAfter is 300",
+                            "id": "a04d78900ac5e16e80e946f4c0a5201f",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "SMOKE-06 | Transfer 300 USD A → B",
+                "path": "::SMOKE-06 | Transfer 300 USD A → B"
+            },
+            "SMOKE-07 | List my transactions": {
+                "path": "::SMOKE-07 | List my transactions",
+                "id": "9f0145068a0d9fe9a782b5629f51deec",
+                "groups": {},
+                "checks": {
+                        "list 200": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "list 200",
+                            "path": "::SMOKE-07 | List my transactions::list 200",
+                            "id": "97b1b09cdf0ca4aec24fd52a93675211"
+                        },
+                        "at least 3 entries": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "at least 3 entries",
+                            "path": "::SMOKE-07 | List my transactions::at least 3 entries",
+                            "id": "25fbfbb2a45e3e4f6c63c477f26e348b"
+                        },
+                        "has DEPOSIT type": {
+                            "name": "has DEPOSIT type",
+                            "path": "::SMOKE-07 | List my transactions::has DEPOSIT type",
+                            "id": "0436c044969c6dbe3b78e7c0196e3519",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "has TRANSFER_DEBIT type": {
+                            "id": "609452e966260c87c7e0eda94b5dfa79",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "has TRANSFER_DEBIT type",
+                            "path": "::SMOKE-07 | List my transactions::has TRANSFER_DEBIT type"
+                        },
+                        "has TRANSFER_CREDIT type": {
+                            "name": "has TRANSFER_CREDIT type",
+                            "path": "::SMOKE-07 | List my transactions::has TRANSFER_CREDIT type",
+                            "id": "ab5376bdb16bae8f31fc4e0f88d878f7",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "SMOKE-07 | List my transactions"
+            },
+            "SMOKE-08 | Reverse the deposit": {
+                "id": "ddf4d0f5a84ffb07f6fd7ce2da6e796b",
+                "groups": {},
+                "checks": {},
+                "name": "SMOKE-08 | Reverse the deposit",
+                "path": "::SMOKE-08 | Reverse the deposit"
+            }
+        },
+        "checks": {}
+    }
+}

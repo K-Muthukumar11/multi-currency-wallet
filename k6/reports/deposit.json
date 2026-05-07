@@ -1,0 +1,504 @@
+{
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "TRF-01 | Transfer funds between two USD accounts": {
+                "id": "de3d750156aec4e51b2ea3b4ba7a719e",
+                "groups": {},
+                "checks": {
+                        "transfer returns 201": {
+                            "name": "transfer returns 201",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::transfer returns 201",
+                            "id": "3aae6f2c1b1bad2d9aa2d1e99c4ffeeb",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "debit txn present": {
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::debit txn present",
+                            "id": "95e40b145318216488a13f7632fd6406",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "debit txn present"
+                        },
+                        "credit txn present": {
+                            "fails": 0,
+                            "name": "credit txn present",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::credit txn present",
+                            "id": "69972587234751c1db0dc7a6a8eaa10d",
+                            "passes": 1
+                        },
+                        "debit type is TRANSFER_DEBIT": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "debit type is TRANSFER_DEBIT",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::debit type is TRANSFER_DEBIT",
+                            "id": "dbf985e331d9508c1413316fdf4dcc03"
+                        },
+                        "credit type is TRANSFER_CREDIT": {
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "credit type is TRANSFER_CREDIT",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::credit type is TRANSFER_CREDIT",
+                            "id": "f4a61b50ccde3f6f615a52a895bdfcf4"
+                        },
+                        "debit amount is 200": {
+                            "fails": 0,
+                            "name": "debit amount is 200",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::debit amount is 200",
+                            "id": "3ecd0898db8b34083ad3d528268b4ec2",
+                            "passes": 1
+                        },
+                        "credit amount is 200": {
+                            "name": "credit amount is 200",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::credit amount is 200",
+                            "id": "9e68af183997ab2349484e11167bfb7d",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "debit status is COMPLETED": {
+                            "name": "debit status is COMPLETED",
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::debit status is COMPLETED",
+                            "id": "8e44e77fb8901173ad565286767d17a3",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "credit status is COMPLETED": {
+                            "path": "::TRF-01 | Transfer funds between two USD accounts::credit status is COMPLETED",
+                            "id": "82175ed78e12f9cfcf0a10462c8f246d",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "credit status is COMPLETED"
+                        }
+                    },
+                "name": "TRF-01 | Transfer funds between two USD accounts",
+                "path": "::TRF-01 | Transfer funds between two USD accounts"
+            },
+            "TRF-02 | Sender balance decremented correctly": {
+                "name": "TRF-02 | Sender balance decremented correctly",
+                "path": "::TRF-02 | Sender balance decremented correctly",
+                "id": "d174bc82d9701f34b8233c2f00aa7937",
+                "groups": {},
+                "checks": {
+                        "second transfer returns 201": {
+                            "name": "second transfer returns 201",
+                            "path": "::TRF-02 | Sender balance decremented correctly::second transfer returns 201",
+                            "id": "41de92fae0fa5b43bf1e3af88953c94f",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "sender balanceAfter reflects deduction": {
+                            "fails": 0,
+                            "name": "sender balanceAfter reflects deduction",
+                            "path": "::TRF-02 | Sender balance decremented correctly::sender balanceAfter reflects deduction",
+                            "id": "b842d03d0fa1bee1c36d414f9434e341",
+                            "passes": 1
+                        }
+                    }
+            },
+            "TRF-03 | Transfer exact remaining balance succeeds": {
+                "groups": {},
+                "checks": {
+                        "exact balance transfer returns 201": {
+                            "name": "exact balance transfer returns 201",
+                            "path": "::TRF-03 | Transfer exact remaining balance succeeds::exact balance transfer returns 201",
+                            "id": "0fd1b1bb0a4433177840ff4f8aea4771",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "TRF-03 | Transfer exact remaining balance succeeds",
+                "path": "::TRF-03 | Transfer exact remaining balance succeeds",
+                "id": "653b3a57509b99261a4b06c2d2742c2f"
+            },
+            "TRF-04 | Transfer with 3-decimal precision": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "name": "setup: deposit 201",
+                        "path": "::TRF-04 | Transfer with 3-decimal precision::setup: deposit 201",
+                        "id": "b8364d2e5def60f9770b5df1d2093f5f",
+                        "passes": 1,
+                        "fails": 0
+                    },
+                    "3dp transfer returns 201": {
+                        "path": "::TRF-04 | Transfer with 3-decimal precision::3dp transfer returns 201",
+                        "id": "ef41e1ea3b4ba4f6f3bf281db3fd8b0e",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "3dp transfer returns 201"
+                    },
+                    "debit amount is 10.005": {
+                        "name": "debit amount is 10.005",
+                        "path": "::TRF-04 | Transfer with 3-decimal precision::debit amount is 10.005",
+                        "id": "8ee1a986cedcfd3128d095cded34e0cb",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "TRF-04 | Transfer with 3-decimal precision",
+                "path": "::TRF-04 | Transfer with 3-decimal precision",
+                "id": "33bd5fdceab8dc1319f3aafd97b1bf3c",
+                "groups": {}
+            },
+            "TRF-05 | Transfer more than available balance returns 422": {
+                "path": "::TRF-05 | Transfer more than available balance returns 422",
+                "id": "371cfc0f2a71dbe09449d0b01af00b2f",
+                "groups": {},
+                "checks": {
+                        "insufficient funds returns 422": {
+                            "name": "insufficient funds returns 422",
+                            "path": "::TRF-05 | Transfer more than available balance returns 422::insufficient funds returns 422",
+                            "id": "83f768bcf9d060751c545ec178b5ad7f",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    },
+                "name": "TRF-05 | Transfer more than available balance returns 422"
+            },
+            "TRF-06 | Cross-currency transfer is rejected": {
+                "name": "TRF-06 | Cross-currency transfer is rejected",
+                "path": "::TRF-06 | Cross-currency transfer is rejected",
+                "id": "8a9d035fab3395f08c2cea26ff8ea1fc",
+                "groups": {},
+                "checks": {
+                        "setup: register 201": {
+                            "name": "setup: register 201",
+                            "path": "::TRF-06 | Cross-currency transfer is rejected::setup: register 201",
+                            "id": "7ce76dccd48c87b6cc824470f14b78d7",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "setup: login 200": {
+                            "name": "setup: login 200",
+                            "path": "::TRF-06 | Cross-currency transfer is rejected::setup: login 200",
+                            "id": "11501c5671ee9073f75ce051d3733621",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "setup: account created 201": {
+                            "path": "::TRF-06 | Cross-currency transfer is rejected::setup: account created 201",
+                            "id": "30c1bb5622d1eac91d027768c86bdec6",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "setup: account created 201"
+                        },
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::TRF-06 | Cross-currency transfer is rejected::setup: deposit 201",
+                            "id": "43a73547e9febb17002f0036cda95b0f",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "cross-currency transfer returns 4xx": {
+                            "name": "cross-currency transfer returns 4xx",
+                            "path": "::TRF-06 | Cross-currency transfer is rejected::cross-currency transfer returns 4xx",
+                            "id": "83a9952ece49a0fd98a6a6729d7e7bc5",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "TRF-07 | Wrong currencyCode in request body returns 4xx": {
+                "id": "830c4917b287ce0e3d4ecbd19d1f8076",
+                "groups": {},
+                "checks": {
+                        "setup: deposit 201": {
+                            "name": "setup: deposit 201",
+                            "path": "::TRF-07 | Wrong currencyCode in request body returns 4xx::setup: deposit 201",
+                            "id": "d425e11fb38b72566e4ee163e38fb587",
+                            "passes": 1,
+                            "fails": 0
+                        },
+                        "currency mismatch returns 4xx": {
+                            "fails": 0,
+                            "name": "currency mismatch returns 4xx",
+                            "path": "::TRF-07 | Wrong currencyCode in request body returns 4xx::currency mismatch returns 4xx",
+                            "id": "6a930e69c52e0089c898b45a57f331be",
+                            "passes": 1
+                        }
+                    },
+                "name": "TRF-07 | Wrong currencyCode in request body returns 4xx",
+                "path": "::TRF-07 | Wrong currencyCode in request body returns 4xx"
+            },
+            "TRF-08 | Self-transfer is rejected": {
+                "name": "TRF-08 | Self-transfer is rejected",
+                "path": "::TRF-08 | Self-transfer is rejected",
+                "id": "0af5272f947fa5eb3ba102e328052d86",
+                "groups": {},
+                "checks": {
+                        "self-transfer returns 4xx": {
+                            "name": "self-transfer returns 4xx",
+                            "path": "::TRF-08 | Self-transfer is rejected::self-transfer returns 4xx",
+                            "id": "09fce7af7f5f352e1611bb815e060531",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "TRF-09 | Non-existent source account returns 404": {
+                "name": "TRF-09 | Non-existent source account returns 404",
+                "path": "::TRF-09 | Non-existent source account returns 404",
+                "id": "bf23ed52616699fc2ebc769c1a049a89",
+                "groups": {},
+                "checks": {
+                        "non-existent source returns 404": {
+                            "name": "non-existent source returns 404",
+                            "path": "::TRF-09 | Non-existent source account returns 404::non-existent source returns 404",
+                            "id": "99808fbd1c1a6a409aba613e6244e87e",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "TRF-10 | Non-existent destination account returns 404": {
+                "name": "TRF-10 | Non-existent destination account returns 404",
+                "path": "::TRF-10 | Non-existent destination account returns 404",
+                "id": "b6697053e69169230f56fd36f8487dcd",
+                "groups": {},
+                "checks": {
+                        "non-existent destination returns 404": {
+                            "name": "non-existent destination returns 404",
+                            "path": "::TRF-10 | Non-existent destination account returns 404::non-existent destination returns 404",
+                            "id": "611c1dd3d89ea85e78e6375594f6ddc6",
+                            "passes": 1,
+                            "fails": 0
+                        }
+                    }
+            },
+            "TRF-11 | Zero amount transfer is rejected": {
+                "checks": {
+                    "zero amount returns 400": {
+                        "name": "zero amount returns 400",
+                        "path": "::TRF-11 | Zero amount transfer is rejected::zero amount returns 400",
+                        "id": "098f4431f4bee455bb6104b5e22110a0",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "TRF-11 | Zero amount transfer is rejected",
+                "path": "::TRF-11 | Zero amount transfer is rejected",
+                "id": "8be5ee41376da0dd7707bc68e791cdd6",
+                "groups": {}
+            },
+            "TRF-12 | Negative amount transfer is rejected": {
+                "groups": {},
+                "checks": {
+                        "negative amount returns 400": {
+                            "fails": 0,
+                            "name": "negative amount returns 400",
+                            "path": "::TRF-12 | Negative amount transfer is rejected::negative amount returns 400",
+                            "id": "2a60d8aabdd68f15e3e5679dac92cb90",
+                            "passes": 1
+                        }
+                    },
+                "name": "TRF-12 | Negative amount transfer is rejected",
+                "path": "::TRF-12 | Negative amount transfer is rejected",
+                "id": "a2972b475e1bd93ac77a82a4240cf145"
+            },
+            "TRF-13 | Missing sourceAccountNumber returns 400": {
+                "id": "aa97ed8a4e36d910fee301c76a3e2998",
+                "groups": {},
+                "checks": {
+                        "missing source returns 400": {
+                            "path": "::TRF-13 | Missing sourceAccountNumber returns 400::missing source returns 400",
+                            "id": "f5fd9eb63104418df0252413baeeee30",
+                            "passes": 1,
+                            "fails": 0,
+                            "name": "missing source returns 400"
+                        }
+                    },
+                "name": "TRF-13 | Missing sourceAccountNumber returns 400",
+                "path": "::TRF-13 | Missing sourceAccountNumber returns 400"
+            },
+            "TRF-14 | Transfer without auth token returns 401/403": {
+                "checks": {
+                    "no-token transfer returns 401 or 403": {
+                        "fails": 0,
+                        "name": "no-token transfer returns 401 or 403",
+                        "path": "::TRF-14 | Transfer without auth token returns 401/403::no-token transfer returns 401 or 403",
+                        "id": "53f6cd6e55fb9724ad24f21bd77b3dd4",
+                        "passes": 1
+                    }
+                },
+                "name": "TRF-14 | Transfer without auth token returns 401/403",
+                "path": "::TRF-14 | Transfer without auth token returns 401/403",
+                "id": "bfea8ad2213c249dce4419124fbb774b",
+                "groups": {}
+            },
+            "TRF-15 | Atomicity — both debit and credit appear in ledger": {
+                "checks": {
+                    "setup: deposit 201": {
+                        "path": "::TRF-15 | Atomicity — both debit and credit appear in ledger::setup: deposit 201",
+                        "id": "1810180a23e5febc4489abfa9b25feb5",
+                        "passes": 1,
+                        "fails": 0,
+                        "name": "setup: deposit 201"
+                    },
+                    "sender has TRANSFER_DEBIT entry": {
+                        "fails": 0,
+                        "name": "sender has TRANSFER_DEBIT entry",
+                        "path": "::TRF-15 | Atomicity — both debit and credit appear in ledger::sender has TRANSFER_DEBIT entry",
+                        "id": "ebdc4ed9d2343c30195e552452f5c7e5",
+                        "passes": 1
+                    },
+                    "receiver has TRANSFER_CREDIT entry": {
+                        "name": "receiver has TRANSFER_CREDIT entry",
+                        "path": "::TRF-15 | Atomicity — both debit and credit appear in ledger::receiver has TRANSFER_CREDIT entry",
+                        "id": "3a4ba2df7aae4733511774989fc67b7d",
+                        "passes": 1,
+                        "fails": 0
+                    }
+                },
+                "name": "TRF-15 | Atomicity — both debit and credit appear in ledger",
+                "path": "::TRF-15 | Atomicity — both debit and credit appear in ledger",
+                "id": "1a800c9cbf75d302ff8a4a21000e548b",
+                "groups": {}
+            }
+        },
+        "checks": {
+            "setup: register 201": {
+                "path": "::setup: register 201",
+                "id": "318977f969f143ded6615dc8c3347607",
+                "passes": 2,
+                "fails": 0,
+                "name": "setup: register 201"
+            },
+            "setup: login 200": {
+                "name": "setup: login 200",
+                "path": "::setup: login 200",
+                "id": "c628dd272ab277a51676393b21166ea1",
+                "passes": 2,
+                "fails": 0
+            },
+            "setup: account created 201": {
+                "name": "setup: account created 201",
+                "path": "::setup: account created 201",
+                "id": "a9d500fed97141f29b9505244cf85c1b",
+                "passes": 2,
+                "fails": 0
+            },
+            "setup: deposit 201": {
+                "name": "setup: deposit 201",
+                "path": "::setup: deposit 201",
+                "id": "b5a60bb08647c8d14e59bce319c2225b",
+                "passes": 1,
+                "fails": 0
+            }
+        },
+        "name": "",
+        "path": ""
+    },
+    "metrics": {
+        "http_reqs": {
+            "count": 31,
+            "rate": 33.858197282541084
+        },
+        "http_req_failed": {
+            "passes": 10,
+            "fails": 21,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 0.3225806451612903
+        },
+        "checks": {
+            "passes": 40,
+            "fails": 0,
+            "value": 1
+        },
+        "http_req_sending": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 1.2006,
+            "p(90)": 0.5985,
+            "p(95)": 0.8593,
+            "avg": 0.16532258064516128,
+            "min": 0
+        },
+        "http_req_tls_handshaking": {
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0
+        },
+        "data_sent": {
+            "rate": 15182.670981438827,
+            "count": 13901
+        },
+        "iteration_duration": {
+            "min": 915.5833,
+            "med": 915.5833,
+            "max": 915.5833,
+            "p(90)": 915.5833,
+            "p(95)": 915.5833,
+            "avg": 915.5833
+        },
+        "http_req_receiving": {
+            "avg": 0.9117580645161288,
+            "min": 0,
+            "med": 0.8747,
+            "max": 1.9259,
+            "p(90)": 1.6929,
+            "p(95)": 1.85525
+        },
+        "http_req_duration": {
+            "avg": 28.604535483870965,
+            "min": 6.8608,
+            "med": 15.2625,
+            "max": 93.4552,
+            "p(90)": 83.635,
+            "p(95)": 85.71715,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_duration{expected_response:true}": {
+            "avg": 36.2063,
+            "min": 9.0287,
+            "med": 17.5161,
+            "max": 93.4552,
+            "p(90)": 84.2203,
+            "p(95)": 87.214
+        },
+        "http_req_waiting": {
+            "p(90)": 83.1283,
+            "p(95)": 85.03020000000001,
+            "avg": 27.69277741935483,
+            "min": 5.6887,
+            "med": 13.4083,
+            "max": 92.693
+        },
+        "group_duration": {
+            "avg": 33.917579999999994,
+            "min": 7.9015,
+            "med": 17.1535,
+            "max": 197.3298,
+            "p(90)": 60.529739999999975,
+            "p(95)": 113.28730999999988
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 1.092199912340035
+        },
+        "http_req_blocked": {
+            "min": 0,
+            "med": 0,
+            "max": 16.2868,
+            "p(90)": 0.674,
+            "p(95)": 1.12065,
+            "avg": 0.6734903225806452
+        },
+        "data_received": {
+            "count": 27472,
+            "rate": 30004.915991805443
+        }
+    }
+}
