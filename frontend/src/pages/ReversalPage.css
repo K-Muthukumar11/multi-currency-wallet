@@ -1,0 +1,267 @@
+/* ── ReversalPage layout ── */
+.reversal-page__layout {
+  grid-template-columns: 1fr 340px;
+  max-width: 1000px;
+}
+@media (max-width: 760px) {
+  .reversal-page__layout { grid-template-columns: 1fr; }
+}
+
+.reversal-page__header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Mode toggle ── */
+.reversal-page__mode-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.reversal-page__mode-btn {
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--ink-2);
+  border: none;
+  letter-spacing: 0.03em;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.reversal-page__mode-btn:hover { color: var(--ink-1); background: var(--bg-elevated); }
+.reversal-page__mode-btn--active {
+  background: var(--bg-elevated);
+  color: var(--ink-1);
+  box-shadow: inset 0 0 0 1px var(--border-light);
+}
+
+/* ── Section label ── */
+.reversal-page__section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Manual search ── */
+.reversal-page__manual .action-page__form-inner { padding: 20px; }
+.reversal-page__search-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.reversal-page__search-row > .field { flex: 1; }
+.reversal-page__search-row > .btn { margin-top: 22px; white-space: nowrap; }
+
+.reversal-page__found-tx {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  animation: fadeSlideIn 0.2s ease;
+}
+.reversal-page__found-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reversal-page__found-icon {
+  font-size: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.reversal-page__found-type {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin-bottom: 2px;
+}
+
+/* ── Browse mode ── */
+.reversal-page__browse { overflow: hidden; }
+.reversal-page__browse-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.reversal-page__count {
+  font-size: 11px;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+}
+.reversal-page__loading {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+.reversal-page__empty {
+  padding: 32px 20px;
+  text-align: center;
+}
+.reversal-page__tx-list {
+  max-height: 460px;
+  overflow-y: auto;
+}
+.reversal-page__tx-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-1);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition);
+  position: relative;
+}
+.reversal-page__tx-row:last-child { border-bottom: none; }
+.reversal-page__tx-row:hover { background: var(--bg-elevated); }
+.reversal-page__tx-row--selected {
+  background: rgba(201,168,76,0.06);
+  border-left: 3px solid var(--gold);
+}
+.reversal-page__tx-icon {
+  font-size: 16px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+}
+.reversal-page__tx-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.reversal-page__tx-type {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.reversal-page__tx-desc {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reversal-page__tx-amount { flex-shrink: 0; }
+.reversal-page__tx-check {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Confirm card ── */
+.reversal-page__confirm { padding: 20px; }
+.reversal-page__confirm-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.reversal-page__transfer-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(77,157,224,0.1);
+  border: 1px solid rgba(77,157,224,0.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--blue);
+  margin-top: 4px;
+}
+.reversal-page__transfer-icon { font-size: 14px; }
+
+.reversal-page__reason-wrap { margin-bottom: 16px; }
+
+.reversal-page__immutability-note {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ── Empty confirm ── */
+.reversal-page__empty-confirm {
+  padding: 36px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.reversal-page__empty-icon {
+  font-size: 32px;
+  color: var(--ink-3);
+}
+
+/* ── Results ── */
+.reversal-page__results {
+  margin-top: 32px;
+}
+.reversal-page__results-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--green);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reversal-page__results-title::before {
+  content: '✓';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  background: var(--green-dim);
+  border-radius: 50%;
+  font-size: 13px;
+}
+.reversal-page__results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.reversal-page__result-card {
+  padding: 18px;
+  border-color: rgba(62,207,142,0.2);
+  background: rgba(62,207,142,0.03);
+}
+.reversal-page__result-icon {
+  width: 28px; height: 28px;
+  background: var(--green-dim);
+  color: var(--green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.reversal-page__result-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
